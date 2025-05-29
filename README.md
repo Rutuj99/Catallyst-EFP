@@ -2,7 +2,7 @@
 A simple web application where employees can submit anonymous feedback, and an admin can view and categorize the feedback.
 
 Deployed Link -  https://catallyst-efp.vercel.app/
-
+A **"Convert to Admin Page"** button is available at the top-right corner of the application. Clicking this will take you to the Admin page.
 ![image](https://github.com/user-attachments/assets/f55e07a0-1d48-419b-aea5-d317c82d6764)
 
 ![image](https://github.com/user-attachments/assets/03392f75-f8aa-4c4a-b9f8-a470e998fa03)
