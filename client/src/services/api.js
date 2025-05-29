@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-// Set baseURL directly (update as needed)
+// Set baseURL directly for PC
+// const api = axios.create({
+//   baseURL: 'http://localhost:5000' 
+// });
+
+
+// Hosted on render 
 const api = axios.create({
-  baseURL: 'http://localhost:5000' 
+  baseURL: 'https://catallyst-efp.onrender.com' 
 });
 
 // Feedback API functions
