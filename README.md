@@ -1,4 +1,7 @@
-# Catallyst-EFP
+# Catallyst- Employee Feedback Portal
+A simple web application where employees can submit anonymous feedback, and an admin can view and categorize the feedback.
+
+Deployed Link -  https://catallyst-efp.vercel.app/
 
 ![image](https://github.com/user-attachments/assets/f55e07a0-1d48-419b-aea5-d317c82d6764)
 
@@ -6,9 +9,9 @@
 
 
 
-# Employee Feedback Portal
 
-A simple web application where employees can submit anonymous feedback, and an admin can view and categorize the feedback.
+
+
 
 ## Features Implemented
 
