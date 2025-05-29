@@ -7,6 +7,13 @@ Deployed Link -  https://catallyst-efp.vercel.app/
 
 ![image](https://github.com/user-attachments/assets/03392f75-f8aa-4c4a-b9f8-a470e998fa03)
 
+## Tech Stack
+
+- **Frontend**: React.js
+- **Styling**: Chakra UI
+- **Backend**: Node.js with Express.js
+- **Database**: MongoDB
+- **API Architecture**: RESTful APIs
 
 
 
