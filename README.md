@@ -3,7 +3,10 @@ A simple web application where employees can submit anonymous feedback, and an a
 
 Deployed Link -  https://catallyst-efp.vercel.app/
 - A **"Admin Dashboard"** button is available at the top-right corner of the application. Clicking this will take you to the Admin page.
+  
 ![image](https://github.com/user-attachments/assets/f55e07a0-1d48-419b-aea5-d317c82d6764)
+
+- An **"Employee View"** button is available at the top-right corner of the Admin page. Clicking this again will take you back to the Feedback Form.
 
 ![image](https://github.com/user-attachments/assets/03392f75-f8aa-4c4a-b9f8-a470e998fa03)
 
