@@ -23,7 +23,7 @@ import {
   AlertIcon
 } from '@chakra-ui/react';
 import { CheckIcon, DeleteIcon } from '@chakra-ui/icons';
-import axios from 'axios';
+import { feedbackApi } from '../services/api';
 
 const AdminDashboard = () => {
   const [feedbackList, setFeedbackList] = useState([]);
@@ -36,11 +36,7 @@ const AdminDashboard = () => {
   const fetchFeedback = async () => {
     try {
       setLoading(true);
-      const url = selectedCategory 
-        ? `/feedback?category=${encodeURIComponent(selectedCategory)}` 
-        : '/feedback';
-      
-      const response = await axios.get(url);
+      const response = await feedbackApi.getAllFeedback(selectedCategory);
       setFeedbackList(response.data);
       setError(null);
     } catch (error) {
@@ -51,28 +47,22 @@ const AdminDashboard = () => {
     }
   };
 
-  // Initial data fetch
   useEffect(() => {
     fetchFeedback();
   }, [selectedCategory]);
 
-  // Handle category filter change
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
   };
 
-  // Mark feedback as reviewed
   const markAsReviewed = async (id) => {
     try {
-      await axios.patch(`/feedback/${id}/reviewed`);
-      
-      // Update local state
-      setFeedbackList(prevList => 
-        prevList.map(item => 
+      await feedbackApi.markAsReviewed(id);
+      setFeedbackList(prevList =>
+        prevList.map(item =>
           item._id === id ? { ...item, reviewed: true } : item
         )
       );
-      
       toast({
         title: 'Success',
         description: 'Feedback marked as reviewed',
@@ -92,15 +82,11 @@ const AdminDashboard = () => {
     }
   };
 
-  // Delete feedback
   const deleteFeedback = async (id) => {
     if (window.confirm('Are you sure you want to delete this feedback?')) {
       try {
-        await axios.delete(`/feedback/${id}`);
-        
-        // Update local state
+        await feedbackApi.deleteFeedback(id);
         setFeedbackList(prevList => prevList.filter(item => item._id !== id));
-        
         toast({
           title: 'Success',
           description: 'Feedback deleted successfully',
@@ -121,11 +107,10 @@ const AdminDashboard = () => {
     }
   };
 
-  // Format date
   const formatDate = (dateString) => {
-    const options = { 
-      year: 'numeric', 
-      month: 'short', 
+    const options = {
+      year: 'numeric',
+      month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
@@ -138,13 +123,12 @@ const AdminDashboard = () => {
       <Card boxShadow="lg">
         <CardBody>
           <Heading size="lg" mb={6}>Admin Dashboard</Heading>
-          
-          {/* Filter */}
+
           <Flex justify="space-between" align="center" mb={6}>
             <HStack>
               <Text fontWeight="medium">Filter by Category:</Text>
-              <Select 
-                value={selectedCategory} 
+              <Select
+                value={selectedCategory}
                 onChange={handleCategoryChange}
                 placeholder="All Categories"
                 w="200px"
@@ -155,13 +139,12 @@ const AdminDashboard = () => {
                 <option value="Others">Others</option>
               </Select>
             </HStack>
-            
+
             <Text fontWeight="medium">
               Total: {feedbackList.length} feedback entries
             </Text>
           </Flex>
-          
-          {/* Loading and Error States */}
+
           {loading ? (
             <Flex justify="center" py={10}>
               <Spinner size="xl" color="blue.500" />
@@ -177,7 +160,6 @@ const AdminDashboard = () => {
               No feedback entries found.
             </Alert>
           ) : (
-            /* Feedback Table */
             <Box overflowX="auto">
               <Table variant="simple">
                 <Thead bg="gray.50">

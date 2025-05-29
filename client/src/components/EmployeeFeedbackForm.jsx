@@ -13,7 +13,7 @@ import {
   CardBody,
   Text
 } from '@chakra-ui/react';
-import axios from 'axios';
+import { feedbackApi } from '../services/api';
 
 const EmployeeFeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -33,8 +33,7 @@ const EmployeeFeedbackForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validation
+
     if (!formData.feedback.trim()) {
       toast({
         title: 'Error',
@@ -45,7 +44,7 @@ const EmployeeFeedbackForm = () => {
       });
       return;
     }
-    
+
     if (!formData.category) {
       toast({
         title: 'Error',
@@ -56,17 +55,13 @@ const EmployeeFeedbackForm = () => {
       });
       return;
     }
-    
+
     try {
       setIsSubmitting(true);
-      await axios.post('/feedback', formData);
-      
-      // Reset form
-      setFormData({
-        feedback: '',
-        category: ''
-      });
-      
+      await feedbackApi.submitFeedback(formData);
+
+      setFormData({ feedback: '', category: '' });
+
       toast({
         title: 'Success',
         description: 'Your feedback has been submitted anonymously',
@@ -97,7 +92,7 @@ const EmployeeFeedbackForm = () => {
               <Heading size="lg" mb={2}>Submit Feedback</Heading>
               <Text color="gray.600">Your feedback is anonymous and helps us improve</Text>
             </Box>
-            
+
             <form onSubmit={handleSubmit}>
               <VStack spacing={4} align="stretch">
                 <FormControl isRequired>
@@ -111,7 +106,7 @@ const EmployeeFeedbackForm = () => {
                     rows={6}
                   />
                 </FormControl>
-                
+
                 <FormControl isRequired>
                   <FormLabel>Category</FormLabel>
                   <Select
@@ -126,7 +121,7 @@ const EmployeeFeedbackForm = () => {
                     <option value="Others">Others</option>
                   </Select>
                 </FormControl>
-                
+
                 <Button
                   type="submit"
                   colorScheme="blue"
